@@ -1,0 +1,49 @@
+name: task_managament_app_with_flutter_hive
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons:
+
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0  
+
+  uuid:
+
+  intl:
+
+  animate_do:
+
+  panara_dialogs:
+
+  lottie:
+
+  ftoast: 
+
+  flutter_slider_drawer:
+
+  flutter_cupertino_date_picker_fork:
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner:
+
+  hive_generator:
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/img/
+    - assets/lottie/
