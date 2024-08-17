@@ -1,12 +1,6 @@
-//? CodeWithFlexz on Instagram
-
-//* AmirBayat0 on Github
-//! Programming with Flexz on Youtube
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:task_managament_app_with_flutter_hive/views/home/home_view.dart';
-
 
 
 main(){
