@@ -39,7 +39,7 @@ dev_dependencies:
 
   hive_generator:
 
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true

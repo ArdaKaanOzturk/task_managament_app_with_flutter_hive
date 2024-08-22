@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_managament_app_with_flutter_hive/extensions/responsive_sizes.dart';
 import 'package:task_managament_app_with_flutter_hive/utils/app_colors.dart';
 
 class TaskWidget extends StatelessWidget {
@@ -8,6 +9,9 @@ class TaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = getScreenWidth(context);
+    final screenHeight = getScreenHeight(context);
+
     return GestureDetector(
       onTap: (){
         /// Navigate to Task View to see Task Details
@@ -39,7 +43,7 @@ class TaskWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.grey, width: .8)
+                border: Border.all(color: Colors.grey, width: screenWidth * 0.001)
               ),
               child: const Icon(Icons.check,
                   color: Colors.white,

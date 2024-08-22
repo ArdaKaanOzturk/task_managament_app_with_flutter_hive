@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:lottie/lottie.dart';
 import 'package:task_managament_app_with_flutter_hive/extensions/space_exs.dart';
 import 'package:task_managament_app_with_flutter_hive/utils/app_colors.dart';
 import 'package:task_managament_app_with_flutter_hive/utils/app_str.dart';
 import 'package:task_managament_app_with_flutter_hive/utils/constants.dart';
 import 'package:task_managament_app_with_flutter_hive/views/home/components/fab.dart';
+import 'package:task_managament_app_with_flutter_hive/views/home/components/home_app_bar.dart';
+import 'package:task_managament_app_with_flutter_hive/views/home/components/slider_drawer.dart';
 import 'package:task_managament_app_with_flutter_hive/views/home/widget/task_widget.dart';
 import 'package:animate_do/animate_do.dart';
+
+import '../../extensions/responsive_sizes.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
+  
 }
 
 class _HomeViewState extends State<HomeView> {
+  GlobalKey<SliderDrawerState> drawerKey = GlobalKey<SliderDrawerState>();
 
-  final List<int> testing = [1, 2, 3];
+  final List<int> testing = [];
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+
+    final screenWidth = getScreenWidth(context);
+    final screenHeight = getScreenHeight(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -29,12 +39,25 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButton: const Fab(),
 
       /// Body
-      body: _buildHomeBody(textTheme),
+      body: SliderDrawer(
+        key: drawerKey,
+        isDraggable: false,
+        animationDuration: 1000,
+        /// Drawer
+        slider: CustomDrawer(),
+
+        appBar: HomeAppBar(
+          drawerKey: drawerKey,
+          ),
+
+        /// Main Body
+        child: _buildHomeBody(textTheme, screenHeight, screenWidth),
+      ),
     );
   }
 
 /// Home Body
-  Widget _buildHomeBody(TextTheme textTheme) {
+  Widget _buildHomeBody(TextTheme textTheme, double screenHeight, double screenWidth) {
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
@@ -43,19 +66,21 @@ class _HomeViewState extends State<HomeView> {
           /// Custom App Bar
           Container(
               margin: const EdgeInsets.only(top: 60),
-              height: 100,
+              height: screenHeight * 0.09,
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   /// Progress Indicator
-                  const SizedBox(
-                      width: 25,
-                      height: 25,
+                  SizedBox(
+                      width: screenWidth * 0.075,
+                      height: screenHeight * 0.038,
                       child: CircularProgressIndicator(
                           value: 1 / 3,
                           backgroundColor: Colors.grey,
-                          valueColor: AlwaysStoppedAnimation(AppColors.primaryColor))),
+                          valueColor: AlwaysStoppedAnimation(AppColors.primaryColor)
+                          )
+                          ),
 
                   /// Space
                   25.w,
@@ -78,7 +103,7 @@ class _HomeViewState extends State<HomeView> {
             padding: EdgeInsets.only(top: 10),
             child: Divider(
               thickness: 2,
-              indent: 100,
+              indent: 90,
             ),
           ),
 
@@ -87,7 +112,7 @@ class _HomeViewState extends State<HomeView> {
             child: SingleChildScrollView(
               child: SizedBox(
                 width: double.infinity,
-                height: 745,
+                height: screenHeight * 0.65,
                 child: testing.isNotEmpty 
                 
                 /// Task list is not empty
@@ -131,8 +156,8 @@ class _HomeViewState extends State<HomeView> {
                     /// Lottie Animation
                     FadeIn(
                       child: SizedBox(
-                        width: 200,
-                        height: 200,
+                        width: screenWidth * 0.6,
+                        height: screenHeight * 0.3,
                         child: Lottie.asset(
                           lottieURL, 
                           animate: testing.isNotEmpty ? false : true),
